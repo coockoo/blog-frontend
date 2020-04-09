@@ -68,16 +68,9 @@ module.exports = {
         ],
       },
       {
-        test: /\.png$/,
-        include: path.join(__dirname, './icons'),
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: './[path][name].[ext]',
-            },
-          },
-        ],
+        test: /\.gql$/,
+        include: path.join(__dirname, './src'),
+        use: 'raw-loader',
       },
     ],
   },
@@ -97,11 +90,6 @@ module.exports = {
     contentBase: path.join(__dirname, './dist'),
     hot: true,
     historyApiFallback: true,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3000',
-        pathRewrite: { '^/api': '' },
-      },
-    },
+    proxy: { '/graphql': { target: 'http://localhost:3000' } },
   },
 };
