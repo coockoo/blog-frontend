@@ -1,0 +1,22 @@
+import auth from '../auth';
+
+export default async function graphQLRequest(query, variables) {
+  const body = { query, variables };
+
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+  const accessToken = auth.getAccessToken();
+  if (accessToken) {
+    headers.Authorization = `Bearer ${accessToken}`;
+  }
+
+  const response = await fetch('/graphql', {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(body),
+  });
+
+  const responseBody = await response.json();
+  return responseBody;
+}

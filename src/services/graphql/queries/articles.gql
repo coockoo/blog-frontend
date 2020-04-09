@@ -1,0 +1,12 @@
+query Articles {
+  articles {
+    count
+    rows {
+      id
+      title
+      body
+      createdAt
+      updatedAt
+    }
+  }
+}
