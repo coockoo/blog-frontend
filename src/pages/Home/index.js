@@ -5,6 +5,8 @@ import articlesQuery from '../../services/graphql/queries/articles.gql';
 
 import { at, reducer, initialState } from './reducer';
 
+import Article from './Article';
+
 import s from './styles.less';
 
 async function loadArticles(dispatch) {
@@ -26,5 +28,11 @@ export default function HomePage() {
     loadArticles(dispatch);
   }, []);
 
-  return <div className={s.homePage}>{state.rows.map((article) => article.id)}</div>;
+  return (
+    <div className={s.homePage}>
+      {state.rows.map((article) => (
+        <Article key={article.id} {...article} />
+      ))}
+    </div>
+  );
 }
