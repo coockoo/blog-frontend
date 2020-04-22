@@ -1,0 +1,43 @@
+.signInPage {
+  box-sizing: border-box;
+  flex: 1;
+  padding: 0 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signInPage form {
+  display: flex;
+  flex-direction: column;
+  width: 480px;
+}
+
+.signInPage form > div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+  border: 1px solid #222;
+}
+
+.signInPage form > div > label {
+  position: absolute;
+  color: #555;
+  padding: 12px 8px;
+  cursor: text;
+  transition: font-size 0.1s ease-in, padding 0.1s ease-in;
+}
+
+.signInPage form > div > input {
+  box-sizing: border-box;
+  padding: 12px 8px;
+}
+
+.signInPage form > div > input:focus + label {
+  font-size: 0.6rem;
+  padding-top: 2px;
+}
+
+.signInButton {
+  padding: 12px 0;
+}
