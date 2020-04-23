@@ -2,16 +2,35 @@ import createReducer from '../../utils/createReducer';
 // TODO: Add path resolver ?
 export const at = {
   CHANGE: 'CHANGE',
+  SIGN_IN_START: 'SIGN_IN_START',
+  SIGN_IN_SUCCESS: 'SIGN_IN_SUCCESS',
+  SIGN_IN_ERROR: 'SIGN_IN_ERROR',
 };
 
 export const initialState = {
-  username: '',
+  isLoading: false,
+  nickname: '',
   password: '',
+  error: null,
 };
 
 export const reducer = createReducer({
   [at.CHANGE]: (state, action) => ({
     ...state,
     ...action.update,
+    error: null,
+  }),
+  [at.SIGN_IN_START]: (state) => ({
+    ...state,
+    isLoading: true,
+  }),
+  [at.SIGN_IN_SUCCESS]: (state) => ({
+    ...state,
+    isLoading: false,
+  }),
+  [at.SIGN_IN_ERROR]: (state, action) => ({
+    ...state,
+    isLoading: false,
+    error: action.error,
   }),
 });
