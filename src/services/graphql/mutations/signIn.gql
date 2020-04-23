@@ -1,5 +1,5 @@
-mutation SignIn($email: String!, $password: String!, $withRefresh: Boolean) {
-  signIn(email: $email, password: $password, withRefresh: $withRefresh) {
+mutation SignIn($nickname: String!, $password: String!, $withRefresh: Boolean) {
+  signIn(nickname: $nickname, password: $password, withRefresh: $withRefresh) {
     accessToken
     refreshToken
   }

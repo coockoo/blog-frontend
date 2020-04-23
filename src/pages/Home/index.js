@@ -13,7 +13,7 @@ async function loadArticles(dispatch) {
   dispatch({ type: at.LOAD_ARTICLES_START });
   try {
     const res = await graphQL(articlesQuery);
-    const { count, rows } = res.data.articles;
+    const { count, rows } = res.articles;
     dispatch({ type: at.LOAD_ARTICLES_SUCCESS, count, rows });
   } catch (error) {
     console.error(error);

@@ -1,5 +1,7 @@
 import auth from '../auth';
 
+import GraphQLError from './GraphQLError';
+
 export default async function graphQLRequest(query, variables) {
   const body = { query, variables };
 
@@ -18,5 +20,8 @@ export default async function graphQLRequest(query, variables) {
   });
 
   const responseBody = await response.json();
-  return responseBody;
+  if (!responseBody.data && responseBody.errors) {
+    throw new GraphQLError(responseBody.errors);
+  }
+  return responseBody.data;
 }
