@@ -1,4 +1,5 @@
 import React, { useCallback, useReducer } from 'react';
+import cn from 'classnames';
 
 import Button from '../../components/Button';
 
@@ -17,12 +18,10 @@ export default function SignInPage() {
     doSignIn({ username: state.username, password: state.password });
   }, [state.username, state.password]);
 
-  // TODO: Make input not to drop label if there is a value
-
   return (
     <div className={s.signInPage}>
-      <form>
-        <div>
+      <form className={s.signInForm}>
+        <div className={cn(s.formGroup, { [s.hasValue]: !!state.username })}>
           <input
             type="text"
             id="username"
@@ -32,7 +31,7 @@ export default function SignInPage() {
           />
           <label htmlFor="username">Username</label>
         </div>
-        <div>
+        <div className={cn(s.formGroup, { [s.hasValue]: !!state.password })}>
           <input
             type="password"
             id="password"
@@ -42,7 +41,9 @@ export default function SignInPage() {
           />
           <label htmlFor="password">Password</label>
         </div>
-        <Button onClick={signIn} className={s.signInButton}>Sign In</Button>
+        <Button onClick={signIn} className={s.signInButton} type="button">
+          Sign In
+        </Button>
       </form>
     </div>
   );

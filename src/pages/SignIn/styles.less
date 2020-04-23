@@ -7,20 +7,20 @@
   align-items: center;
 }
 
-.signInPage form {
+.signInForm {
   display: flex;
   flex-direction: column;
   width: 480px;
 }
 
-.signInPage form > div {
+.formGroup {
   display: flex;
   flex-direction: column;
   margin-bottom: 8px;
   border: 1px solid #222;
 }
 
-.signInPage form > div > label {
+.formGroup label {
   position: absolute;
   color: #555;
   padding: 12px 8px;
@@ -28,12 +28,13 @@
   transition: font-size 0.1s ease-in, padding 0.1s ease-in;
 }
 
-.signInPage form > div > input {
+.formGroup input {
   box-sizing: border-box;
   padding: 12px 8px;
 }
 
-.signInPage form > div > input:focus + label {
+.hasValue label,
+.formGroup input:focus + label {
   font-size: 0.6rem;
   padding-top: 2px;
 }
