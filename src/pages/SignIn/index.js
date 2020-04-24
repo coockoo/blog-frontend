@@ -13,14 +13,16 @@ import s from './styles.less';
 
 async function doSignIn(variables, dispatch) {
   dispatch({ type: at.SIGN_IN_START });
+  let res;
   try {
-    const res = await graphQL(signInMutation, variables);
-    const { accessToken } = res.data.signIn;
-    auth.setAuthState({ accessToken });
-    dispatch({ type: at.SIGN_IN_SUCCESS });
+    res = await graphQL(signInMutation, variables);
   } catch (error) {
     dispatch({ type: at.SIGN_IN_ERROR, error: error.errors[0].message });
+    return;
   }
+  const { accessToken } = res.signIn;
+  auth.setAuthState({ accessToken });
+  dispatch({ type: at.SIGN_IN_SUCCESS });
 }
 
 export default function SignInPage() {
