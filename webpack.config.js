@@ -27,13 +27,7 @@ module.exports = {
       {
         test: /\.js$/,
         include: path.join(__dirname, './src'),
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-            plugins: ['react-hot-loader/babel'],
-          },
-        },
+        use: { loader: 'babel-loader' },
       },
       {
         test: /\.less$/,

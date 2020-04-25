@@ -11,12 +11,12 @@
       "jsx": true
     }
   },
-  "plugins": ["require-path-exists", "react", "react-hooks"],
+  "plugins": ["react", "react-hooks", "import"],
   "extends": [
     "eslint:recommended",
-    "plugin:require-path-exists/recommended",
     "plugin:react/recommended",
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended",
+    "plugin:import/recommended"
   ],
   "rules": {
     "brace-style": ["error", "1tbs"],
@@ -33,5 +33,10 @@
     "quotes": ["error", "single", { "avoidEscape": true }],
     "semi": ["error", "always"],
     "react/prop-types": ["off"]
+  },
+  "settings": {
+    "import/resolver": {
+      "babel-module": {}
+    }
   }
 }
