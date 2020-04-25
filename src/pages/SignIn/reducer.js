@@ -1,5 +1,5 @@
-import createReducer from '../../utils/createReducer';
-// TODO: Add path resolver ?
+import createReducer from 'utils/createReducer';
+
 export const at = {
   CHANGE: 'CHANGE',
   SIGN_IN_START: 'SIGN_IN_START',
