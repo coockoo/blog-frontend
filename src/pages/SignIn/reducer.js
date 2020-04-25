@@ -12,6 +12,7 @@ export const initialState = {
   nickname: '',
   password: '',
   error: null,
+  redirect: false,
 };
 
 export const reducer = createReducer({
@@ -27,6 +28,7 @@ export const reducer = createReducer({
   [at.SIGN_IN_SUCCESS]: (state) => ({
     ...state,
     isLoading: false,
+    redirect: true,
   }),
   [at.SIGN_IN_ERROR]: (state, action) => ({
     ...state,

@@ -1,4 +1,5 @@
 import React, { useCallback, useReducer } from 'react';
+import { useHistory } from 'react-router-dom';
 import cn from 'classnames';
 
 import auth from '../../services/auth';
@@ -11,7 +12,7 @@ import { reducer, at, initialState } from './reducer';
 
 import s from './styles.less';
 
-async function doSignIn(variables, dispatch) {
+async function doSignIn(variables, dispatch, history) {
   dispatch({ type: at.SIGN_IN_START });
   let res;
   try {
@@ -23,14 +24,16 @@ async function doSignIn(variables, dispatch) {
   const { accessToken } = res.signIn;
   auth.setAuthState({ accessToken });
   dispatch({ type: at.SIGN_IN_SUCCESS });
+  history.replace('/');
 }
 
 export default function SignInPage() {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const history = useHistory();
 
   const signIn = useCallback(() => {
-    doSignIn({ nickname: state.nickname, password: state.password }, dispatch);
-  }, [state.nickname, state.password]);
+    doSignIn({ nickname: state.nickname, password: state.password }, dispatch, history);
+  }, [state.nickname, state.password, history]);
 
   const isButtonDisabled = !state.nickname || !state.password || state.isLoading;
 

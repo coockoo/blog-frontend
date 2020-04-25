@@ -1,6 +1,6 @@
 import React, { StrictMode } from 'react';
 import { hot } from 'react-hot-loader/root';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import TopNav from './components/TopNav';
 
@@ -12,18 +12,12 @@ function App() {
     <StrictMode>
       <Router>
         <TopNav />
-        <Switch>
-          <Route path="/private">
-            <Route path="/private/sign-in">
-              <SignInPage />
-            </Route>
-          </Route>
-          <Route path="/">
-            <Route path="/" exact>
-              <HomePage />
-            </Route>
-          </Route>
-        </Switch>
+        <Route path="/sign-in" exact>
+          <SignInPage />
+        </Route>
+        <Route path="/" exact>
+          <HomePage />
+        </Route>
       </Router>
     </StrictMode>
   );
