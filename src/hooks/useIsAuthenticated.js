@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import auth from '../services/auth';
+import auth from 'Services/auth';
 
 export default function useIsAuthenticated() {
   const [isAuthenticated, setAuthenticated] = useState(auth.isAuthenticated());

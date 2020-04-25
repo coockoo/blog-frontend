@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-import useIsAuthenticated from '../../hooks/useIsAuthenticated';
-import auth from '../../services/auth';
+import useIsAuthenticated from 'Hooks/useIsAuthenticated';
+import auth from 'Services/auth';
 
 import s from './styles.less';
 

@@ -1,4 +1,4 @@
-import createReducer from 'utils/createReducer';
+import createReducer from 'Utils/createReducer';
 
 export const at = {
   LOAD_ARTICLES_START: 'LOAD_ARTICLES_START',

@@ -1,4 +1,4 @@
-import createReducer from 'utils/createReducer';
+import createReducer from 'Utils/createReducer';
 
 export const at = {
   CHANGE: 'CHANGE',

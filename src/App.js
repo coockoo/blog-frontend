@@ -2,10 +2,10 @@ import React, { StrictMode } from 'react';
 import { hot } from 'react-hot-loader/root';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import TopNav from 'components/TopNav';
+import TopNav from 'Components/TopNav';
 
-import HomePage from 'pages/Home';
-import SignInPage from 'pages/SignIn';
+import HomePage from 'Pages/Home';
+import SignInPage from 'Pages/SignIn';
 
 function App() {
   return (

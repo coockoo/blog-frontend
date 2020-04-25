@@ -2,11 +2,11 @@ import React, { useCallback, useReducer } from 'react';
 import { useHistory } from 'react-router-dom';
 import cn from 'classnames';
 
-import auth from 'services/auth';
-import graphQL from 'services/graphql';
-import signInMutation from 'services/graphql/mutations/signIn.gql';
+import auth from 'Services/auth';
+import graphQL from 'Services/graphql';
+import signInMutation from 'Services/graphql/mutations/signIn.gql';
 
-import Button from 'components/Button';
+import Button from 'Components/Button';
 
 import { reducer, at, initialState } from './reducer';
 

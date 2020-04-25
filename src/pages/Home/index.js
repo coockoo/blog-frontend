@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer } from 'react';
 
-import graphQL from 'services/graphql';
-import articlesQuery from 'services/graphql/queries/articles.gql';
+import graphQL from 'Services/graphql';
+import articlesQuery from 'Services/graphql/queries/articles.gql';
 
 import { at, reducer, initialState } from './reducer';
 

@@ -1,4 +1,4 @@
-import auth from 'services/auth';
+import auth from 'Services/auth';
 
 import GraphQLError from './GraphQLError';
 
