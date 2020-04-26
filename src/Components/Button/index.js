@@ -11,3 +11,7 @@ export default function Button(props) {
     </button>
   );
 }
+
+Button.defaultProps = {
+  type: 'button',
+};
