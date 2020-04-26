@@ -25,7 +25,7 @@ export default function TopNav() {
         <ul>
           {isAuthenticated ? (
             <li>
-              <Link to="/articles/create">Create Article</Link>
+              <Link to="/articles/new/edit">Create Article</Link>
             </li>
           ) : null}
           <li>
