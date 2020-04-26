@@ -1,0 +1,10 @@
+mutation UpdateArticle($id: String!, $title: String!, $outline: String!, $body: String!) {
+  createArticle(id: $id, title: $title, outline: $outline, body: $body) {
+    id
+    title
+    outline
+    body
+    createdAt
+    updatedAt
+  }
+}

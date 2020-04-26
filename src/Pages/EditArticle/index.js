@@ -6,26 +6,42 @@ import cn from 'classnames';
 import Button from 'Components/Button';
 import Textarea from 'Components/Textarea';
 
+import createArticleMutation from 'Services/graphql/mutations/createArticle.gql';
+import updateArticleMutation from 'Services/graphql/mutations/updateArticle.gql';
+import graphQL from 'Services/graphql';
+
 import s from './styles.less';
 
 import { reducer, initialState, at } from './reducer';
 
+const isNew = (id) => id === 'new';
+
 async function doSaveArticle(id, state, dispatch) {
   dispatch({ type: at.SAVE_START });
+  let res;
   try {
-    // TODO: add implementation
+    const isArticleNew = isNew(id);
+    const mutation = isArticleNew ? createArticleMutation : updateArticleMutation;
+    const variables = {
+      title: state.title,
+      outline: state.outline,
+      body: state.body,
+    };
+    if (!isArticleNew) {
+      variables.id = id;
+    }
+    res = await graphQL(mutation, variables);
   } catch (error) {
     dispatch({ type: at.SAVE_ERROR });
     return;
   }
   dispatch({ type: at.SAVE_SUCCESS });
+  console.log(res);
 }
 
 export default function EditArticlePage() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { id } = useParams();
-
-  const isNew = id === 'new';
 
   const saveArticle = useCallback(() => {
     doSaveArticle(id, state, dispatch);
@@ -66,7 +82,7 @@ export default function EditArticlePage() {
           </div>
         </div>
         <div>
-          <Button onClick={saveArticle}>{isNew ? 'Create Article' : 'Update article'}</Button>
+          <Button onClick={saveArticle}>{isNew(id) ? 'Create Article' : 'Update article'}</Button>
         </div>
       </form>
     </div>
