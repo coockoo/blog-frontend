@@ -13,14 +13,14 @@ html {
 body {
   height: 100%;
   overflow: hidden;
+  display: flex;
 }
 
 :global(#mount) {
-  height: 100%;
+  flex: 1;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  // TODO: discover why is body scrolling
 }
 
 a {
@@ -33,7 +33,8 @@ li {
 
 button,
 select,
-input {
+input,
+textarea {
   border: none;
   outline: none;
 }
