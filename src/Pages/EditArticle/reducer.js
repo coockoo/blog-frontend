@@ -2,15 +2,20 @@ import createReducer from 'Utils/createReducer';
 
 export const at = {
   CHANGE: 'CHANGE',
+  LOAD_START: 'LOAD_START',
+  LOAD_SUCCESS: 'LOAD_SUCCESS',
+  LOAD_ERROR: 'LOAD_ERROR',
   SAVE_START: 'SAVE_START',
   SAVE_SUCCESS: 'SAVE_SUCCESS',
   SAVE_ERROR: 'SAVE_ERROR',
 };
 
 export const initialState = {
-  title: 'Hi there!',
-  outline: 'My initial article',
-  body: '# This is my article body',
+  title: '',
+  outline: '',
+  body: '',
+  isSaving: false,
+  isLoading: false,
 };
 
 export const reducer = createReducer({
@@ -18,6 +23,21 @@ export const reducer = createReducer({
     ...state,
     ...action.update,
   }),
+
+  [at.LOAD_START]: (state) => ({
+    ...state,
+    isLoading: true,
+  }),
+  [at.LOAD_SUCCESS]: (state, action) => ({
+    ...state,
+    ...action.article,
+    isLoading: false,
+  }),
+  [at.LOAD_ERROR]: (state) => ({
+    ...state,
+    isLoading: false,
+  }),
+
   [at.SAVE_START]: (state) => ({
     ...state,
     isSaving: true,

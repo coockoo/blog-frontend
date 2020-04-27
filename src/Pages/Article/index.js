@@ -1,10 +1,12 @@
 import React, { useEffect, useReducer } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import articleQuery from 'Services/graphql/queries/article.gql';
 import graphQL from 'Services/graphql';
 
 import Markdown from 'Components/Markdown';
+
+import useIsAuthenticated from 'Hooks/useIsAuthenticated';
 
 import s from './styles.less';
 
@@ -27,6 +29,7 @@ export default function ArticlePage() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const { id } = useParams();
+  const isAuthenticated = useIsAuthenticated();
 
   useEffect(() => {
     loadArticle(id, dispatch);
@@ -38,7 +41,10 @@ export default function ArticlePage() {
 
   return (
     <div className={s.articlePage}>
-      <h1>{state.article.title}</h1>
+      <div className={s.title}>
+        <h1>{state.article.title}</h1>
+        {isAuthenticated ? <Link to={`/articles/${id}/edit`}>Edit</Link> : null}
+      </div>
       <div className={s.articleBody}>
         <Markdown value={state.article.body} />
       </div>

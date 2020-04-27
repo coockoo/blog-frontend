@@ -1,11 +1,12 @@
-import React, { useReducer, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useReducer, useCallback, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import cn from 'classnames';
 
 import Button from 'Components/Button';
 import Textarea from 'Components/Textarea';
 
+import articleQuery from 'Services/graphql/queries/article.gql';
 import createArticleMutation from 'Services/graphql/mutations/createArticle.gql';
 import updateArticleMutation from 'Services/graphql/mutations/updateArticle.gql';
 import graphQL from 'Services/graphql';
@@ -16,11 +17,11 @@ import { reducer, initialState, at } from './reducer';
 
 const isNew = (id) => id === 'new';
 
-async function doSaveArticle(id, state, dispatch) {
+async function doSaveArticle(id, state, dispatch, history) {
   dispatch({ type: at.SAVE_START });
   let res;
+  const isArticleNew = isNew(id);
   try {
-    const isArticleNew = isNew(id);
     const mutation = isArticleNew ? createArticleMutation : updateArticleMutation;
     const variables = {
       title: state.title,
@@ -36,16 +37,41 @@ async function doSaveArticle(id, state, dispatch) {
     return;
   }
   dispatch({ type: at.SAVE_SUCCESS });
-  console.log(res);
+
+  if (isArticleNew) {
+    history.replace(`/articles/${res.createArticle.id}/edit`);
+  }
+}
+
+async function doLoadArticle(id, dispatch) {
+  const isArticleNew = isNew(id);
+  if (isArticleNew) {
+    return;
+  }
+
+  dispatch({ type: at.LOAD_START });
+  let res;
+  try {
+    res = await graphQL(articleQuery, { id });
+  } catch (error) {
+    dispatch({ type: at.LOAD_ERROR });
+    return;
+  }
+  dispatch({ type: at.LOAD_SUCCESS, article: res.article });
 }
 
 export default function EditArticlePage() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { id } = useParams();
+  const history = useHistory();
 
   const saveArticle = useCallback(() => {
-    doSaveArticle(id, state, dispatch);
-  }, [id, state]);
+    doSaveArticle(id, state, dispatch, history);
+  }, [id, state, history]);
+
+  useEffect(() => {
+    doLoadArticle(id, dispatch);
+  }, [id]);
 
   return (
     <div className={s.editArticlePage}>
