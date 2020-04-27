@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
+    "marked": "^1.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hot-loader": "^4.12.20",

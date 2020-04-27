@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import articleQuery from 'Services/graphql/queries/article.gql';
 import graphQL from 'Services/graphql';
 
+import Markdown from 'Components/Markdown';
+
 import s from './styles.less';
 
 import { reducer, initialState, at } from './reducer';
@@ -34,11 +36,12 @@ export default function ArticlePage() {
     return <div>Loading...</div>;
   }
 
-  console.log(state.article);
   return (
     <div className={s.articlePage}>
       <h1>{state.article.title}</h1>
-      <div className={s.articleBody}>{state.article.body}</div>
+      <div className={s.articleBody}>
+        <Markdown value={state.article.body} />
+      </div>
     </div>
   );
 }
