@@ -30,6 +30,11 @@ module.exports = {
         use: { loader: 'babel-loader' },
       },
       {
+        test: /\.css$/,
+        include: path.join(__dirname, './node_modules'),
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+      },
+      {
         test: /\.less$/,
         include: path.join(__dirname, './src'),
         use: [

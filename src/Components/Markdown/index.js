@@ -1,15 +1,22 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useRef } from 'react';
 import marked from 'marked';
+import hljs from 'highlight.js/lib/core';
 
 // import s from './styles.less';
 
 function renderTokens(tokens) {
+  if (!tokens) {
+    return null;
+  }
   return <Fragment>{tokens.map(renderToken)}</Fragment>;
 }
 
 function renderToken(token, index) {
   if (token.type === 'heading') {
     return renderHeading(token, index);
+  }
+  if (token.type === 'code') {
+    return renderCode(token, index);
   }
   if (token.type === 'text') {
     return token.text;
@@ -30,12 +37,29 @@ function renderHeading(token, key) {
   return <h3 key={key}>{content}</h3>;
 }
 
+function renderCode(token, key) {
+  return (
+    <pre>
+      <code lang={token.lang} key={key}>
+        {token.text}
+      </code>
+    </pre>
+  );
+}
+
 function render(markdown) {
   const tokens = marked.lexer(markdown);
   return renderTokens(tokens);
 }
 
 export default function Markdown(props) {
-  console.log(props.value);
-  return <div>{render(props.value)}</div>;
+  const ref = useRef(null);
+
+  useEffect(() => {
+    ref.current.querySelectorAll('pre code').forEach((block) => {
+      hljs.highlightBlock(block);
+    });
+  }, [ref]);
+
+  return <div ref={ref}>{render(props.value)}</div>;
 }
