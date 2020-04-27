@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import TopNav from 'Components/TopNav';
 
+import ArticlePage from 'Pages/Article';
 import EditArticlePage from 'Pages/EditArticle';
 import HomePage from 'Pages/Home';
 import SignInPage from 'Pages/SignIn';
@@ -15,6 +16,9 @@ function App() {
         <TopNav />
         <Route path="/sign-in" exact>
           <SignInPage />
+        </Route>
+        <Route path="/articles/:id" exact>
+          <ArticlePage />
         </Route>
         <Route path="/articles/:id/edit" exact>
           <EditArticlePage />

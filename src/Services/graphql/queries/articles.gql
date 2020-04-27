@@ -4,6 +4,7 @@ query Articles {
     rows {
       id
       title
+      outline
       body
       createdAt
       updatedAt

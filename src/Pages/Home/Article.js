@@ -11,7 +11,7 @@ export default function Article(props) {
       <h1>
         <Link to={`/articles/${props.id}`}>{props.title}</Link>
       </h1>
-      <p>{props.body}</p>
+      <p>{props.outline}</p>
       <div className={s.date} title={dateStr}>
         {dateStr}
       </div>
