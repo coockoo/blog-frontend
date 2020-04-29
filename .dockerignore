@@ -1,0 +1,6 @@
+.git
+node_modules
+*.sw[mnop]
+.DS_Store
+dist
+README.md
