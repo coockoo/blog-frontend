@@ -18,11 +18,23 @@ function renderToken(token, index) {
   if (token.type === 'code') {
     return renderCode(token, index);
   }
+  if (token.type === 'paragraph') {
+    return renderParagraph(token, index);
+  }
   if (token.type === 'text') {
     return token.text;
   }
+  if (token.type === 'strong') {
+    return <strong key={index}>{token.text}</strong>;
+  }
+  if (token.type === 'em') {
+    return <em key={index}>{token.text}</em>;
+  }
+  if (token.type === 'space') {
+    return null;
+  }
   console.error(token);
-  throw new Error(`cannot render token ${token.type}`);
+  throw new Error(`cannot render token "${token.type}"`);
 }
 
 function renderHeading(token, key) {
@@ -39,12 +51,15 @@ function renderHeading(token, key) {
 
 function renderCode(token, key) {
   return (
-    <pre>
-      <code lang={token.lang} key={key}>
-        {token.text}
-      </code>
+    <pre key={key}>
+      <code lang={token.lang}>{token.text}</code>
     </pre>
   );
+}
+
+function renderParagraph(token, key) {
+  const content = renderTokens(token.tokens);
+  return <p key={key}>{content}</p>;
 }
 
 function render(markdown) {
