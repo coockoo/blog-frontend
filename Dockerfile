@@ -32,6 +32,8 @@ RUN mkdir -p /app/dist
 WORKDIR /app
 
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
-COPY nginx/app.conf /etc/nginx/sites-enabled/app.conf
+COPY nginx/app.conf /etc/nginx/conf.d/app.conf.template
 
 COPY --from=build /build/dist /app/dist
+
+CMD /bin/sh -c "envsubst '\$BACKEND' < /etc/nginx/conf.d/app.conf.template > /etc/nginx/conf.d/app.conf && exec nginx-debug -g 'daemon off;'"

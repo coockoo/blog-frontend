@@ -10,6 +10,7 @@ env:
   SERVICE_NAME: blog-frontend
   REGION: europe-west4
   PORT: 80
+  BACKEND: ${{ secrets.BACKEND }}
 
 jobs:
   setup-build-publish-deploy:
@@ -47,4 +48,5 @@ jobs:
             --image="$TAG" \
             --platform="managed" \
             --port="$PORT" \
+            --set-env-vars=BACKEND="$BACKEND" \
             --allow-unauthenticated
