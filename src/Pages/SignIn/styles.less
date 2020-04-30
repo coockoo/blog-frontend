@@ -1,3 +1,5 @@
+@import '../../variables.less';
+
 .signInPage {
   box-sizing: border-box;
   flex: 1;
@@ -18,12 +20,12 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 8px;
-  border: 1px solid #222;
+  border: 1px solid @inputBorderColor;
 }
 
 .formGroup label {
   position: absolute;
-  color: #555;
+  color: @inputLabelColor;
   padding: 12px 8px;
   cursor: text;
   transition: font-size 0.1s ease-in, padding 0.1s ease-in;
@@ -32,6 +34,8 @@
 .formGroup input {
   box-sizing: border-box;
   padding: 12px 8px;
+  font-size: 16px;
+  color: @textColor;
 }
 
 .hasValue label,

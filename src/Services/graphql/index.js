@@ -19,6 +19,11 @@ export default async function graphQLRequest(query, variables) {
     body: JSON.stringify(body),
   });
 
+  // TODO: This is not a graphql error. Need investigation on how to make this better
+  if (!response.ok) {
+    throw new GraphQLError([{ message: 'Network error' }]);
+  }
+
   const responseBody = await response.json();
   if (!responseBody.data && responseBody.errors) {
     throw new GraphQLError(responseBody.errors);
