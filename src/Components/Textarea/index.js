@@ -4,14 +4,13 @@ import cn from 'classnames';
 import s from './styles.less';
 
 export default function Textarea(props) {
-  const onChange = (e) => {
-    props.onChange(e.target.value);
-  };
+  const { className, onChange, value, ...rest } = props;
   return (
     <textarea
-      value={props.value || ''}
-      onChange={onChange}
-      className={cn(props.className, s.textarea)}
+      value={value || ''}
+      onChange={(e) => onChange(e.target.value)}
+      className={cn(className, s.textarea)}
+      {...rest}
     ></textarea>
   );
 }

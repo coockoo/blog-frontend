@@ -1,9 +1,9 @@
 import React, { useReducer, useCallback, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
 import cn from 'classnames';
 
 import Button from 'Components/Button';
+import Markdown from 'Components/Markdown';
 import Textarea from 'Components/Textarea';
 
 import articleQuery from 'Services/graphql/queries/article.gql';
@@ -77,33 +77,35 @@ export default function EditArticlePage() {
     <div className={s.editArticlePage}>
       <form className={s.articleForm}>
         <div className={s.formGroup}>
-          <label>Title</label>
           <input
+            className={s.articleTitle}
             type="text"
+            placeholder="Title..."
             value={state.title}
             onChange={(e) => dispatch({ type: at.CHANGE, update: { title: e.target.value } })}
           />
         </div>
+
         <div className={s.formGroup}>
-          <label>Outline</label>
           <input
             type="text"
             value={state.outline}
+            placeholder="Outline"
             onChange={(e) => dispatch({ type: at.CHANGE, update: { outline: e.target.value } })}
           />
         </div>
         <div className={cn(s.formGroup, s.bodyGroup)}>
-          <label>Body</label>
           <div className={s.articleBody}>
             <div>
               <Textarea
                 value={state.body}
                 onChange={(body) => dispatch({ type: at.CHANGE, update: { body } })}
                 className={s.bodyText}
+                placeholder="Let your thoughts fly"
               />
             </div>
             <div>
-              <ReactMarkdown source={state.body} />
+              <Markdown value={state.body} />
             </div>
           </div>
         </div>
