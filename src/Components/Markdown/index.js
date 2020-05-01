@@ -21,9 +21,6 @@ function renderToken(token, index) {
   if (token.type === 'paragraph') {
     return renderParagraph(token, index);
   }
-  if (token.type === 'text') {
-    return token.text;
-  }
   if (token.type === 'strong') {
     return <strong key={index}>{token.text}</strong>;
   }
@@ -31,7 +28,10 @@ function renderToken(token, index) {
     return <em key={index}>{token.text}</em>;
   }
   if (token.type === 'space') {
-    return null;
+    return renderSpace(token, index);
+  }
+  if (token.type === 'text') {
+    return token.text;
   }
   console.error(token);
   throw new Error(`cannot render token "${token.type}"`);
@@ -62,6 +62,20 @@ function renderParagraph(token, key) {
   return <p key={key}>{content}</p>;
 }
 
+function renderSpace(token, key) {
+  const range = Array(token.raw.length - 1).fill();
+
+  return (
+    <Fragment key={key}>
+      {range.map((_, i) => (
+        <Fragment key={i}>
+          <br />
+        </Fragment>
+      ))}
+    </Fragment>
+  );
+}
+
 function render(markdown) {
   const tokens = marked.lexer(markdown);
   return renderTokens(tokens);
@@ -74,7 +88,7 @@ export default function Markdown(props) {
     ref.current.querySelectorAll('pre code').forEach((block) => {
       hljs.highlightBlock(block);
     });
-  }, [ref]);
+  }, [ref, props.value]);
 
   return <div ref={ref}>{render(props.value)}</div>;
 }
