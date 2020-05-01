@@ -24,11 +24,16 @@ function renderToken(token, index) {
   if (token.type === 'list') {
     return renderList(token, index);
   }
+  if (token.type === 'link') {
+    return renderLink(token, index);
+  }
   if (token.type === 'strong') {
-    return <strong key={index}>{token.text}</strong>;
+    const content = renderTokens(token.tokens);
+    return <strong key={index}>{content}</strong>;
   }
   if (token.type === 'em') {
-    return <em key={index}>{token.text}</em>;
+    const content = renderTokens(token.tokens);
+    return <em key={index}>{content}</em>;
   }
   if (token.type === 'space') {
     return renderSpace(token, index);
@@ -75,6 +80,15 @@ function renderList(token, key) {
     return <ol key={key}>{items}</ol>;
   }
   return <ul key={key}>{items}</ul>;
+}
+
+function renderLink(token, key) {
+  const content = token.tokens ? renderTokens(token.tokens) : token.text;
+  return (
+    <a href={token.href} key={key}>
+      {content}
+    </a>
+  );
 }
 
 function renderSpace(token, key) {
