@@ -21,6 +21,9 @@ function renderToken(token, index) {
   if (token.type === 'paragraph') {
     return renderParagraph(token, index);
   }
+  if (token.type === 'list') {
+    return renderList(token, index);
+  }
   if (token.type === 'strong') {
     return <strong key={index}>{token.text}</strong>;
   }
@@ -62,8 +65,20 @@ function renderParagraph(token, key) {
   return <p key={key}>{content}</p>;
 }
 
+function renderList(token, key) {
+  const items = token.items.map((item, index) => {
+    const content = renderTokens(item.tokens);
+    return <li key={index}>{content}</li>;
+  });
+
+  if (token.ordered) {
+    return <ol key={key}>{items}</ol>;
+  }
+  return <ul key={key}>{items}</ul>;
+}
+
 function renderSpace(token, key) {
-  const range = Array(token.raw.length - 1).fill();
+  const range = Array(token.raw.length - 2).fill();
 
   return (
     <Fragment key={key}>
