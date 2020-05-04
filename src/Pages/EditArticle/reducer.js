@@ -51,7 +51,7 @@ export const reducer = createReducer({
     ...state,
     isSaving: false,
   }),
-  [at.RESET]: (state) => ({
+  [at.RESET]: () => ({
     ...initialState,
   }),
 });
