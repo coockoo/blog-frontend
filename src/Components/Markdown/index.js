@@ -27,6 +27,9 @@ function renderToken(token, index) {
   if (token.type === 'link') {
     return renderLink(token, index);
   }
+  if (token.type === 'codespan') {
+    return renderCodespan(token, index);
+  }
   if (token.type === 'strong') {
     const content = renderTokens(token.tokens);
     return <strong key={index}>{content}</strong>;
@@ -89,6 +92,10 @@ function renderLink(token, key) {
       {content}
     </a>
   );
+}
+
+function renderCodespan(token, key) {
+  return <code key={key}>{token.text}</code>;
 }
 
 function renderSpace(token, key) {
