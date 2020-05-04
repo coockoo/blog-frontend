@@ -11,16 +11,19 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  align-items: flex-end;
 }
 
 .title h1 {
   margin-right: 8px;
   font-family: @titleFontFamily;
-  font-family: @titleFontSize;
+  font-size: @titleFontSize;
+  line-height: 1em;
 }
 
 .title a {
   font-weight: 300;
+  color: @secondaryTextColor;
 
   &:hover {
     text-decoration: underline;
