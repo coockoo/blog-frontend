@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import articleQuery from 'Services/graphql/queries/article.gql';
 import graphQL from 'Services/graphql';
 
+import Date from 'Components/Date';
 import Markdown from 'Components/Markdown';
 
 import useIsAuthenticated from 'Hooks/useIsAuthenticated';
@@ -45,6 +46,7 @@ export default function ArticlePage() {
         <h1>{state.article.title}</h1>
         {isAuthenticated ? <Link to={`/articles/${id}/edit`}>Edit</Link> : null}
       </div>
+      <Date value={state.article.createdAt} />
       <div className={s.articleBody}>
         <Markdown value={state.article.body} />
       </div>
