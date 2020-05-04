@@ -36,8 +36,20 @@ export default function ArticlePage() {
     loadArticle(id, dispatch);
   }, [id]);
 
-  if (state.isLoading || !state.article) {
-    return <div>Loading...</div>;
+  const isLoading = state.isLoading || !state.article;
+
+  if (isLoading) {
+    return (
+      <div className={s.articlePage}>
+        <div className={s.titlePlaceholder}></div>
+        <div className={s.datePlaceholder}></div>
+
+        <div className={s.bodyPlaceholderA}></div>
+        <div className={s.bodyPlaceholderB}></div>
+        <div className={s.bodyPlaceholderA}></div>
+        <div className={s.bodyPlaceholderB}></div>
+      </div>
+    );
   }
 
   return (
