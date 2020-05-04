@@ -1,6 +1,7 @@
-import React, { Fragment, useEffect, useRef } from 'react';
+import React, { Fragment } from 'react';
 import marked from 'marked';
-import hljs from 'highlight.js/lib/core';
+
+import Code from 'Components/Code';
 
 import s from './styles.less';
 
@@ -61,11 +62,7 @@ function renderHeading(token, key) {
 }
 
 function renderCode(token, key) {
-  return (
-    <pre key={key}>
-      <code lang={token.lang}>{token.text}</code>
-    </pre>
-  );
+  return <Code key={key} lang={token.lang} value={token.text} />;
 }
 
 function renderParagraph(token, key) {
@@ -126,17 +123,5 @@ function render(markdown) {
 }
 
 export default function Markdown(props) {
-  const ref = useRef(null);
-
-  useEffect(() => {
-    ref.current.querySelectorAll('pre code').forEach((block) => {
-      hljs.highlightBlock(block);
-    });
-  }, [ref, props.value]);
-
-  return (
-    <div ref={ref} className={s.root}>
-      {render(props.value)}
-    </div>
-  );
+  return <div className={s.root}>{render(props.value)}</div>;
 }
