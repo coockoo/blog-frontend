@@ -5,7 +5,7 @@
   box-sizing: border-box;
 }
 
-.code {
+.codespan {
   background-color: @codeBackgroundColor;
   color: @codeMainColor;
   font-family: @codeFontFamily;
@@ -15,4 +15,14 @@
 
 .paragraph {
   line-height: 1.2em;
+}
+
+.link {
+  text-decoration: underline;
+  color: @textColor;
+  font-weight: bold;
+
+  &:hover {
+    text-decoration: none;
+  }
 }

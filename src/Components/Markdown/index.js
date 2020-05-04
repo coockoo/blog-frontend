@@ -92,7 +92,7 @@ function renderList(token, key) {
 function renderLink(token, key) {
   const content = token.tokens ? renderTokens(token.tokens) : token.text;
   return (
-    <a href={token.href} key={key}>
+    <a href={token.href} key={key} className={s.link}>
       {content}
     </a>
   );
@@ -100,7 +100,7 @@ function renderLink(token, key) {
 
 function renderCodespan(token, key) {
   return (
-    <code key={key} className={s.code}>
+    <code key={key} className={s.codespan}>
       {token.text}
     </code>
   );
