@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useRef } from 'react';
 import marked from 'marked';
 import hljs from 'highlight.js/lib/core';
 
-// import s from './styles.less';
+import s from './styles.less';
 
 function renderTokens(tokens) {
   if (!tokens) {
@@ -70,7 +70,11 @@ function renderCode(token, key) {
 
 function renderParagraph(token, key) {
   const content = renderTokens(token.tokens);
-  return <p key={key}>{content}</p>;
+  return (
+    <p key={key} className={s.paragraph}>
+      {content}
+    </p>
+  );
 }
 
 function renderList(token, key) {
@@ -95,7 +99,11 @@ function renderLink(token, key) {
 }
 
 function renderCodespan(token, key) {
-  return <code key={key}>{token.text}</code>;
+  return (
+    <code key={key} className={s.code}>
+      {token.text}
+    </code>
+  );
 }
 
 function renderSpace(token, key) {
@@ -126,5 +134,9 @@ export default function Markdown(props) {
     });
   }, [ref, props.value]);
 
-  return <div ref={ref}>{render(props.value)}</div>;
+  return (
+    <div ref={ref} className={s.root}>
+      {render(props.value)}
+    </div>
+  );
 }

@@ -96,7 +96,7 @@ export default function EditArticlePage() {
         </div>
         <div className={cn(s.formGroup, s.bodyGroup)}>
           <div className={s.articleBody}>
-            <div>
+            <div className={s.bodyEditor}>
               <Textarea
                 value={state.body}
                 onChange={(body) => dispatch({ type: at.CHANGE, update: { body } })}
@@ -104,7 +104,7 @@ export default function EditArticlePage() {
                 placeholder="Let your thoughts fly"
               />
             </div>
-            <div>
+            <div className={s.bodyPreview}>
               <Markdown value={state.body} />
             </div>
           </div>
