@@ -46,6 +46,7 @@ async function doSaveArticle(id, state, dispatch, history) {
 async function doLoadArticle(id, dispatch) {
   const isArticleNew = isNew(id);
   if (isArticleNew) {
+    dispatch({ type: at.RESET });
     return;
   }
 

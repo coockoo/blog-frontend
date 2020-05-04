@@ -8,6 +8,7 @@ export const at = {
   SAVE_START: 'SAVE_START',
   SAVE_SUCCESS: 'SAVE_SUCCESS',
   SAVE_ERROR: 'SAVE_ERROR',
+  RESET: 'RESET',
 };
 
 export const initialState = {
@@ -49,5 +50,8 @@ export const reducer = createReducer({
   [at.SAVE_ERROR]: (state) => ({
     ...state,
     isSaving: false,
+  }),
+  [at.RESET]: (state) => ({
+    ...initialState,
   }),
 });
