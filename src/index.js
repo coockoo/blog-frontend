@@ -3,9 +3,10 @@ import * as React from 'react';
 
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
-import 'highlight.js/styles/monokai.css';
+// import 'highlight.js/styles/monokai.css';
 
 import './global.less';
+import './Styles/code.less';
 
 import App from 'App';
 
