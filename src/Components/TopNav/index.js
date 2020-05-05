@@ -34,7 +34,9 @@ export default function TopNav() {
                 Sign Out
               </Link>
             ) : (
-              <Link to="/sign-in">Sign In</Link>
+              <Link to="/sign-in" className={s.signIn}>
+                Sign In
+              </Link>
             )}
           </li>
         </ul>
