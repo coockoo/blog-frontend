@@ -15,24 +15,19 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .title h1 {
+  flex: 1;
   margin-right: 8px;
   font-family: @titleFontFamily;
   font-size: @titleFontSize;
   line-height: 1em;
 }
 
-.title a {
-  font-weight: 300;
-  color: @secondaryTextColor;
-  text-decoration: underline;
-
-  &:hover {
-    text-decoration: none;
-  }
+.title button {
+  margin-left: 8px;
 }
 
 .titlePlaceholder {

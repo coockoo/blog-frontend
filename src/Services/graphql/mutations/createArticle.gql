@@ -4,6 +4,8 @@ mutation CreateArticle($title: String!, $outline: String!, $body: String!) {
     title
     outline
     body
+    isPublished
+    lastPublishedAt
     createdAt
     updatedAt
   }

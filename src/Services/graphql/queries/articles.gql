@@ -1,5 +1,5 @@
-query Articles {
-  articles {
+query Articles($isPublished: Boolean) {
+  articles(isPublished: $isPublished) {
     count
     rows {
       id

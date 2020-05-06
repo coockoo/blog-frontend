@@ -1,0 +1,12 @@
+mutation PublishArticle($id: ID!) {
+  publishArticle(id: $id) {
+    id
+    title
+    outline
+    body
+    isPublished
+    lastPublishedAt
+    createdAt
+    updatedAt
+  }
+}

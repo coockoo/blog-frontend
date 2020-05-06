@@ -4,6 +4,8 @@ mutation UpdateArticle($id: ID!, $title: String!, $outline: String!, $body: Stri
     title
     outline
     body
+    isPublished
+    lastPublishedAt
     createdAt
     updatedAt
   }

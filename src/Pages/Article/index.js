@@ -1,9 +1,11 @@
-import React, { useEffect, useReducer } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { Fragment, useEffect, useReducer, useCallback } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 
 import articleQuery from 'Services/graphql/queries/article.gql';
+import publishArticleMutation from 'Services/graphql/mutations/publishArticle.gql';
 import graphQL from 'Services/graphql';
 
+import Button from 'Components/Button';
 import Date from 'Components/Date';
 import Markdown from 'Components/Markdown';
 
@@ -26,8 +28,20 @@ async function loadArticle(id, dispatch) {
   dispatch({ type: at.LOAD_SUCCESS, article: res.article });
 }
 
+async function publishArticle(id, dispatch) {
+  // TODO: Add actions and stuff
+  try {
+    await graphQL(publishArticleMutation, { id });
+  } catch (error) {
+    console.error(error);
+    return;
+  }
+  dispatch({ type: at.PUBLISH_ARTICLE_SUCCESS });
+}
+
 export default function ArticlePage() {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const history = useHistory();
 
   const { id } = useParams();
   const isAuthenticated = useIsAuthenticated();
@@ -37,6 +51,19 @@ export default function ArticlePage() {
   }, [id]);
 
   const isLoading = state.isLoading || !state.article;
+
+  const edit = useCallback(() => {
+    history.push(`/articles/${id}/edit`);
+  }, [id, history]);
+
+  const publish = useCallback(() => {
+    publishArticle(id, dispatch);
+  }, [id]);
+
+  const unpublish = useCallback(() => {
+    console.log('unpublish', id);
+    // TODO:
+  }, [id]);
 
   if (isLoading) {
     return (
@@ -56,7 +83,16 @@ export default function ArticlePage() {
     <div className={s.articlePage}>
       <div className={s.title}>
         <h1>{state.article.title}</h1>
-        {isAuthenticated ? <Link to={`/articles/${id}/edit`}>Edit</Link> : null}
+        {isAuthenticated ? (
+          <Fragment>
+            <Button onClick={edit}>Edit</Button>
+            {!state.article.isPublished ? (
+              <Button onClick={publish}>Publish</Button>
+            ) : (
+              <Button onClick={unpublish}>Unpublish</Button>
+            )}
+          </Fragment>
+        ) : null}
       </div>
       <Date value={state.article.createdAt} />
       <div className={s.articleBody}>
