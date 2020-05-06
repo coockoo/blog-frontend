@@ -11,9 +11,15 @@
   box-sizing: border-box;
 }
 
-.brand a {
-  font-size: 20px;
-  color: @textColor;
+.brand {
+  a {
+    font-size: 20px;
+    color: @textColor;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .links ul {
