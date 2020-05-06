@@ -12,7 +12,10 @@ import s from './styles.less';
 async function loadArticles(dispatch) {
   dispatch({ type: at.LOAD_ARTICLES_START });
   try {
-    const res = await graphQL(articlesQuery);
+    const args = {
+      isPublished: true,
+    };
+    const res = await graphQL(articlesQuery, args);
     const { count, rows } = res.articles;
     dispatch({ type: at.LOAD_ARTICLES_SUCCESS, count, rows });
   } catch (error) {

@@ -4,6 +4,8 @@ query Article($id: ID!) {
     title
     outline
     body
+    isPublished
+    lastPublishedAt
     createdAt
     updatedAt
   }

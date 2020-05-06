@@ -6,6 +6,8 @@ query Articles {
       title
       outline
       body
+      isPublished
+      lastPublishedAt
       createdAt
       updatedAt
     }
