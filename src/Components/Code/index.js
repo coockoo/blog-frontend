@@ -9,7 +9,7 @@ export default function Code(props) {
   }, [ref, props.value]);
 
   return (
-    <pre>
+    <pre className={props.className}>
       <code ref={ref} lang={props.lang}>
         {props.value}
       </code>

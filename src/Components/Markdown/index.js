@@ -62,7 +62,7 @@ function renderHeading(token, key) {
 }
 
 function renderCode(token, key) {
-  return <Code key={key} lang={token.lang} value={token.text} />;
+  return <Code key={key} lang={token.lang} value={token.text} className={s.code} />;
 }
 
 function renderParagraph(token, key) {
