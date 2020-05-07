@@ -1,0 +1,12 @@
+mutation UnpublishArticle($id: ID!) {
+  unpublishArticle(id: $id) {
+    id
+    title
+    outline
+    body
+    isPublished
+    lastPublishedAt
+    createdAt
+    updatedAt
+  }
+}

@@ -5,6 +5,7 @@ export const at = {
   LOAD_SUCCESS: 'LOAD_SUCCESS',
   LOAD_ERROR: 'LOAD_ERROR',
   PUBLISH_ARTICLE_SUCCESS: 'PUBLISH_ARTICLE_SUCCESS',
+  UNPUBLISH_ARTICLE_SUCCESS: 'UNPUBLISH_ARTICLE_SUCCESS',
 };
 
 export const initialState = {
@@ -31,6 +32,13 @@ export const reducer = createReducer({
     article: {
       ...state.article,
       isPublished: true,
+    },
+  }),
+  [at.UNPUBLISH_ARTICLE_SUCCESS]: (state) => ({
+    ...state,
+    article: {
+      ...state.article,
+      isPublished: false,
     },
   }),
 });

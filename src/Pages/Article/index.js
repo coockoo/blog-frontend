@@ -3,6 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 
 import articleQuery from 'Services/graphql/queries/article.gql';
 import publishArticleMutation from 'Services/graphql/mutations/publishArticle.gql';
+import unpublishArticleMutation from 'Services/graphql/mutations/unpublishArticle.gql';
 import graphQL from 'Services/graphql';
 
 import Button from 'Components/Button';
@@ -29,7 +30,6 @@ async function loadArticle(id, dispatch) {
 }
 
 async function publishArticle(id, dispatch) {
-  // TODO: Add actions and stuff
   try {
     await graphQL(publishArticleMutation, { id });
   } catch (error) {
@@ -37,6 +37,16 @@ async function publishArticle(id, dispatch) {
     return;
   }
   dispatch({ type: at.PUBLISH_ARTICLE_SUCCESS });
+}
+
+async function unpublishArticle(id, dispatch) {
+  try {
+    await graphQL(unpublishArticleMutation, { id });
+  } catch (error) {
+    console.error(error);
+    return;
+  }
+  dispatch({ type: at.UNPUBLISH_ARTICLE_SUCCESS });
 }
 
 export default function ArticlePage() {
@@ -61,8 +71,7 @@ export default function ArticlePage() {
   }, [id]);
 
   const unpublish = useCallback(() => {
-    console.log('unpublish', id);
-    // TODO:
+    unpublishArticle(id, dispatch);
   }, [id]);
 
   if (isLoading) {
