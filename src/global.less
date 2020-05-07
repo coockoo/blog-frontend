@@ -1,17 +1,19 @@
+@import './variables.less';
+
 * {
   margin: 0;
   padding: 0;
+  box-sizing: inherit;
 }
 
 html {
-  height: 100%;
+  box-sizing: border-box;
+  overflow-y: scroll;
 }
 
 body {
-  height: 100%;
-  display: flex;
-  font-size: 16px;
-  color: #222;
+  font-size: @baseFontSize;
+  color: @textColor;
 }
 
 body,
@@ -25,7 +27,7 @@ textarea {
   flex: 1;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
+  min-height: 100vh;
 }
 
 a {
