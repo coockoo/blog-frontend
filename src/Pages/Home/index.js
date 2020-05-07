@@ -1,13 +1,13 @@
 import React, { useEffect, useReducer } from 'react';
 
+import Page from 'Components/Page';
+
 import graphQL from 'Services/graphql';
 import articlesQuery from 'Services/graphql/queries/articles.gql';
 
 import { at, reducer, initialState } from './reducer';
 
 import Article from './Article';
-
-import s from './styles.less';
 
 async function loadArticles(dispatch) {
   dispatch({ type: at.LOAD_ARTICLES_START });
@@ -32,10 +32,10 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className={s.homePage}>
+    <Page>
       {state.rows.map((article) => (
         <Article key={article.id} {...article} />
       ))}
-    </div>
+    </Page>
   );
 }

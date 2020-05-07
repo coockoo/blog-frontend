@@ -4,6 +4,7 @@ import cn from 'classnames';
 
 import Button from 'Components/Button';
 import Markdown from 'Components/Markdown';
+import Page from 'Components/Page';
 import Textarea from 'Components/Textarea';
 
 import articleQuery from 'Services/graphql/queries/article.gql';
@@ -75,7 +76,7 @@ export default function EditArticlePage() {
   }, [id]);
 
   return (
-    <div className={s.editArticlePage}>
+    <Page>
       <form className={s.articleForm}>
         <div className={s.formGroup}>
           <input
@@ -114,6 +115,6 @@ export default function EditArticlePage() {
           <Button onClick={saveArticle}>{isNew(id) ? 'Create Article' : 'Update article'}</Button>
         </div>
       </form>
-    </div>
+    </Page>
   );
 }

@@ -9,6 +9,7 @@ import graphQL from 'Services/graphql';
 import Button from 'Components/Button';
 import Date from 'Components/Date';
 import Markdown from 'Components/Markdown';
+import Page from 'Components/Page';
 
 import useIsAuthenticated from 'Hooks/useIsAuthenticated';
 
@@ -89,7 +90,7 @@ export default function ArticlePage() {
   }
 
   return (
-    <div className={s.articlePage}>
+    <Page>
       <div className={s.title}>
         <h1>{state.article.title}</h1>
         {isAuthenticated ? (
@@ -107,6 +108,6 @@ export default function ArticlePage() {
       <div className={s.articleBody}>
         <Markdown value={state.article.body} />
       </div>
-    </div>
+    </Page>
   );
 }
