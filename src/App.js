@@ -2,6 +2,7 @@ import React, { StrictMode } from 'react';
 import { hot } from 'react-hot-loader/root';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
+import PrivateRoute from 'Components/PrivateRoute';
 import TopNav from 'Components/TopNav';
 
 import ArticlePage from 'Pages/Article';
@@ -20,9 +21,9 @@ function App() {
         <Route path="/articles/:id" exact>
           <ArticlePage />
         </Route>
-        <Route path="/articles/:id/edit" exact>
+        <PrivateRoute path="/articles/:id/edit" exact>
           <EditArticlePage />
-        </Route>
+        </PrivateRoute>
         <Route path="/" exact>
           <HomePage />
         </Route>
