@@ -77,7 +77,7 @@ export default function ArticlePage() {
 
   if (isLoading) {
     return (
-      <div className={s.articlePage}>
+      <Page>
         <div className={s.titlePlaceholder}></div>
         <div className={s.datePlaceholder}></div>
 
@@ -85,7 +85,7 @@ export default function ArticlePage() {
         <div className={s.bodyPlaceholderB}></div>
         <div className={s.bodyPlaceholderA}></div>
         <div className={s.bodyPlaceholderB}></div>
-      </div>
+      </Page>
     );
   }
 
