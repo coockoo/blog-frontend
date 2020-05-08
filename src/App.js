@@ -6,6 +6,7 @@ import PrivateRoute from 'Components/PrivateRoute';
 import TopNav from 'Components/TopNav';
 
 import ArticlePage from 'Pages/Article';
+import ArticlesPage from 'Pages/Articles';
 import EditArticlePage from 'Pages/EditArticle';
 import HomePage from 'Pages/Home';
 import SignInPage from 'Pages/SignIn';
@@ -23,6 +24,9 @@ function App() {
         </Route>
         <PrivateRoute path="/articles/:id/edit" exact>
           <EditArticlePage />
+        </PrivateRoute>
+        <PrivateRoute path="/articles" exact>
+          <ArticlesPage />
         </PrivateRoute>
         <Route path="/" exact>
           <HomePage />

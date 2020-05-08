@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import useIsAuthenticated from 'Hooks/useIsAuthenticated';
@@ -24,9 +24,14 @@ export default function TopNav() {
       <div className={s.links}>
         <ul>
           {isAuthenticated ? (
-            <li>
-              <Link to="/articles/new/edit">Create Article</Link>
-            </li>
+            <Fragment>
+              <li>
+                <Link to="/articles">Articles</Link>
+              </li>
+              <li>
+                <Link to="/articles/new/edit">Create Article</Link>
+              </li>
+            </Fragment>
           ) : null}
           <li>
             {isAuthenticated ? (

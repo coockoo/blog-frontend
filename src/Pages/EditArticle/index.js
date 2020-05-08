@@ -76,7 +76,7 @@ export default function EditArticlePage() {
   }, [id]);
 
   return (
-    <Page>
+    <Page responsive={false}>
       <form className={s.articleForm}>
         <div className={s.formGroup}>
           <input

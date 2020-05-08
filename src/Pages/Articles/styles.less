@@ -1,0 +1,41 @@
+// TODO: Move styles to some common place (duplicate for home and here)
+@import '../../variables.less';
+
+.article {
+  margin-bottom: 2rem;
+
+  .title {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    h1 {
+      flex: 1;
+      line-height: @titleFontSize;
+      font-size: @titleFontSize;
+
+      > a {
+        font-family: @titleFontFamily;
+        font-weight: bold;
+        color: @textColor;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .outline {
+    margin: 0.5rem 0;
+  }
+}
+
+.unpublished {
+  margin: 0 8px;
+  font-size: 1rem;
+  line-height: 1rem;
+  font-weight: normal;
+  color: @secondaryTextColor;
+}

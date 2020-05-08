@@ -4,10 +4,14 @@ import cn from 'classnames';
 import s from './styles.less';
 
 export default function Page(props) {
-  const { className, children, ...rest } = props;
+  const { className, children, responsive, ...rest } = props;
   return (
-    <div className={cn(className, s.page)} {...rest}>
+    <div className={cn(s.page, { [s.responsive]: responsive }, className)} {...rest}>
       {children}
     </div>
   );
 }
+
+Page.defaultProps = {
+  responsive: true,
+};
