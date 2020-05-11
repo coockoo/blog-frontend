@@ -11,6 +11,7 @@ env:
   REGION: europe-west4
   PORT: 80
   BACKEND: ${{ secrets.BACKEND }}
+  GA_MEASUREMENT_ID: ${{ secrets.GA_MEASUREMENT_ID }}
 
 jobs:
   setup-build-publish-deploy:
@@ -34,7 +35,7 @@ jobs:
 
       - name: Build the Docker image
         run: |
-          docker build -t $TAG .
+          docker build -t $TAG --build-arg GA_MEASUREMENT_ID="$GA_MEASUREMENT_ID" .
 
       - name: Push the Docker image to Google Container Registry
         run: |

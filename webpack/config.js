@@ -3,17 +3,23 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const webpack = require('webpack');
 
-const env = process.env.NODE_ENV || 'development';
+const GtagPlugin = require('./plugins/gtag');
+
+const { GA_MEASUREMENT_ID, NODE_ENV } = process.env;
+
+const env = NODE_ENV || 'development';
 const isDev = env === 'development';
+
+const ROOT = path.resolve(__dirname, '..');
 
 module.exports = {
   mode: env,
   entry: {
     polyfill: '@babel/polyfill',
-    bundle: path.join(__dirname, './src/index.js'),
+    bundle: path.join(ROOT, './src/index.js'),
   },
   output: {
-    path: path.join(__dirname, './dist'),
+    path: path.join(ROOT, './dist'),
     filename: '[name].js',
     publicPath: '/',
   },
@@ -26,17 +32,17 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        include: path.join(__dirname, './src'),
+        include: path.join(ROOT, './src'),
         use: { loader: 'babel-loader' },
       },
       {
         test: /\.css$/,
-        include: path.join(__dirname, './node_modules'),
+        include: path.join(ROOT, './node_modules'),
         use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
       },
       {
         test: /\.less$/,
-        include: path.join(__dirname, './src'),
+        include: path.join(ROOT, './src'),
         use: [
           isDev ? { loader: 'style-loader' } : { loader: MiniCssExtractPlugin.loader },
           {
@@ -47,7 +53,7 @@ module.exports = {
                 mode: 'local',
                 exportGlobals: true,
                 localIdentName: '[path][name]__[local]--[hash:base64:5]',
-                context: path.join(__dirname, './src'),
+                context: path.join(ROOT, './src'),
               },
             },
           },
@@ -56,7 +62,7 @@ module.exports = {
       },
       {
         test: /\.ttf$/,
-        include: path.join(__dirname, './fonts'),
+        include: path.join(ROOT, './fonts'),
         use: [
           {
             loader: 'file-loader',
@@ -68,17 +74,18 @@ module.exports = {
       },
       {
         test: /\.gql$/,
-        include: path.join(__dirname, './src'),
+        include: path.join(ROOT, './src'),
         use: 'raw-loader',
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, './src/index.html'),
+      template: path.join(ROOT, './src/index.html'),
       cache: true,
       inject: 'body',
     }),
+    isDev ? undefined : new GtagPlugin(GA_MEASUREMENT_ID),
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css',
@@ -86,7 +93,7 @@ module.exports = {
   ],
 
   devServer: {
-    contentBase: path.join(__dirname, './dist'),
+    contentBase: path.join(ROOT, './dist'),
     hot: true,
     historyApiFallback: true,
     proxy: { '/graphql': { target: 'http://localhost:3000' } },

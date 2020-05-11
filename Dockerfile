@@ -11,6 +11,9 @@ RUN npm ci
 
 FROM node:12.16.1-alpine as build
 
+ARG GA_MEASUREMENT_ID
+ENV NODE_ENV production
+
 WORKDIR /build
 
 COPY --from=modules /build/node_modules /build/node_modules
@@ -20,7 +23,7 @@ COPY package*.json ./
 COPY webpack.config.js webpack.config.js
 COPY src src
 
-RUN npm run build
+RUN GA_MEASUREMENT_ID=$GA_MEASUREMENT_ID npm run build
 
 # -- Set up nginx
 
