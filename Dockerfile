@@ -20,7 +20,7 @@ COPY --from=modules /build/node_modules /build/node_modules
 COPY fonts fonts
 COPY .babelrc.js ./
 COPY package*.json ./
-COPY webpack.config.js webpack.config.js
+COPY webpack webpack
 COPY src src
 
 RUN GA_MEASUREMENT_ID=$GA_MEASUREMENT_ID npm run build
