@@ -15,7 +15,8 @@ const ROOT = path.resolve(__dirname, '..');
 module.exports = {
   mode: env,
   entry: {
-    polyfill: '@babel/polyfill',
+    core: 'core-js/stable',
+    regenerator: 'regenerator-runtime/runtime',
     bundle: path.join(ROOT, './src/index.js'),
   },
   output: {
@@ -85,7 +86,7 @@ module.exports = {
       cache: true,
       inject: 'body',
     }),
-    isDev ? undefined : new GtagPlugin(GA_MEASUREMENT_ID),
+    ...(isDev ? [] : [new GtagPlugin(GA_MEASUREMENT_ID)]),
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css',
