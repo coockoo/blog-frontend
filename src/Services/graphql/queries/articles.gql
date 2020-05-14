@@ -5,6 +5,7 @@ query Articles($isPublished: Boolean) {
       id
       title
       outline
+      slug
       body
       isPublished
       lastPublishedAt

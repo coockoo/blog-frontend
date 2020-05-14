@@ -3,6 +3,7 @@ mutation UnpublishArticle($id: ID!) {
     id
     title
     outline
+    slug
     body
     isPublished
     lastPublishedAt

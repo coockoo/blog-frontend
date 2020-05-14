@@ -1,8 +1,9 @@
-mutation UpdateArticle($id: ID!, $title: String!, $outline: String!, $body: String!) {
-  updateArticle(id: $id, title: $title, outline: $outline, body: $body) {
+mutation UpdateArticle($id: ID!, $title: String!, $outline: String!, $slug: String!, $body: String!) {
+  updateArticle(id: $id, title: $title, outline: $outline, slug: $slug, body: $body) {
     id
     title
     outline
+    slug
     body
     isPublished
     lastPublishedAt

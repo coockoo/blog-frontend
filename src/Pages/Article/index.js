@@ -23,7 +23,9 @@ async function loadArticle(id, dispatch) {
   dispatch({ type: at.LOAD_START });
   let res;
   try {
-    res = await graphQL(articleQuery, { id });
+    const isId = `${id}`.match(/^\d+$/);
+    const args = isId ? { id } : { slug: id };
+    res = await graphQL(articleQuery, args);
   } catch (error) {
     console.error(error);
     dispatch({ type: at.LOAD_ERROR });
@@ -61,23 +63,25 @@ export default function ArticlePage() {
   const { id } = useParams();
   const isAuthenticated = useIsAuthenticated();
 
+  const { article } = state;
+
   useEffect(() => {
     loadArticle(id, dispatch);
   }, [id]);
 
-  const isLoading = state.isLoading || !state.article;
+  const isLoading = state.isLoading || !article;
 
   const edit = useCallback(() => {
-    history.push(`/articles/${id}/edit`);
-  }, [id, history]);
+    history.push(`/articles/${article.id}/edit`);
+  }, [article, history]);
 
   const publish = useCallback(() => {
-    publishArticle(id, dispatch);
-  }, [id]);
+    publishArticle(article.id, dispatch);
+  }, [article]);
 
   const unpublish = useCallback(() => {
-    unpublishArticle(id, dispatch);
-  }, [id]);
+    unpublishArticle(article.id, dispatch);
+  }, [article]);
 
   if (isLoading) {
     return (
@@ -96,11 +100,11 @@ export default function ArticlePage() {
   return (
     <Page>
       <div className={s.title}>
-        <h1>{state.article.title}</h1>
+        <h1>{article.title}</h1>
         {isAuthenticated ? (
           <Fragment>
             <Button onClick={edit}>Edit</Button>
-            {!state.article.isPublished ? (
+            {!article.isPublished ? (
               <Button onClick={publish}>Publish</Button>
             ) : (
               <Button onClick={unpublish}>Unpublish</Button>
@@ -108,9 +112,9 @@ export default function ArticlePage() {
           </Fragment>
         ) : null}
       </div>
-      <Date value={state.article.createdAt} />
+      <Date value={article.isPublished ? article.lastPublishedAt : article.createdAt} />
       <div className={s.articleBody}>
-        <Markdown value={state.article.body} />
+        <Markdown value={article.body} />
       </div>
     </Page>
   );

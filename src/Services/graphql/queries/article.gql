@@ -1,8 +1,9 @@
-query Article($id: ID!) {
-  article(id: $id) {
+query Article($id: ID, $slug: ID) {
+  article(id: $id, slug: $slug) {
     id
     title
     outline
+    slug
     body
     isPublished
     lastPublishedAt

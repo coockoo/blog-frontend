@@ -1,5 +1,5 @@
 import React, { useReducer, useCallback, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import cn from 'classnames';
 
 import Button from 'Components/Button';
@@ -29,6 +29,7 @@ async function doSaveArticle(id, state, dispatch, history) {
     const variables = {
       title: state.title,
       outline: state.outline,
+      slug: state.slug,
       body: state.body,
     };
     if (!isArticleNew) {
@@ -80,6 +81,7 @@ export default function EditArticlePage() {
 
   return (
     <Page responsive={false}>
+      <Link to="/articles" className={s.toArticles}>To articles</Link>
       <form className={s.articleForm}>
         <div className={s.formGroup}>
           <input
@@ -99,6 +101,16 @@ export default function EditArticlePage() {
             onChange={(e) => dispatch({ type: at.CHANGE, update: { outline: e.target.value } })}
           />
         </div>
+
+        <div className={s.formGroup}>
+          <input
+            type="text"
+            value={state.slug}
+            placeholder="Slug"
+            onChange={(e) => dispatch({ type: at.CHANGE, update: { slug: e.target.value } })}
+          />
+        </div>
+
         <div className={cn(s.formGroup, s.bodyGroup)}>
           <div className={s.articleBody}>
             <div className={s.bodyEditor}>

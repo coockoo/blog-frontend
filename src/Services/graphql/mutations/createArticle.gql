@@ -1,8 +1,9 @@
-mutation CreateArticle($title: String!, $outline: String!, $body: String!) {
-  createArticle(title: $title, outline: $outline, body: $body) {
+mutation CreateArticle($title: String!, $outline: String!, $slug: Stirng!, $body: String!) {
+  createArticle(title: $title, outline: $outline, slug: $slug, body: $body) {
     id
     title
     outline
+    slug
     body
     isPublished
     lastPublishedAt

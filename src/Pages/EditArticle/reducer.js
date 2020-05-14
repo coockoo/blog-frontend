@@ -14,6 +14,7 @@ export const at = {
 export const initialState = {
   title: '',
   outline: '',
+  slug: '',
   body: '',
   isSaving: false,
   isLoading: false,
