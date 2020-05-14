@@ -22,11 +22,7 @@ export default function Notifications() {
   return (
     <div className={s.notifications}>
       {items.map((item) => (
-        <Notification
-          key={item.id}
-          text={item.text}
-          onClick={() => notifications.remove(item.id)}
-        />
+        <Notification key={item.id} id={item.id} text={item.text} onClick={notifications.remove} />
       ))}
     </div>
   );
