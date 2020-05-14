@@ -10,7 +10,7 @@ import Textarea from 'Components/Textarea';
 import articleQuery from 'Services/graphql/queries/article.gql';
 import createArticleMutation from 'Services/graphql/mutations/createArticle.gql';
 import updateArticleMutation from 'Services/graphql/mutations/updateArticle.gql';
-import graphQL from 'Services/graphql';
+import graphQL, { GraphQLError } from 'Services/graphql';
 
 import notifications from 'Services/notifications';
 
@@ -38,6 +38,8 @@ async function doSaveArticle(id, state, dispatch, history) {
     res = await graphQL(mutation, variables);
   } catch (error) {
     dispatch({ type: at.SAVE_ERROR });
+    const { message } = error instanceof GraphQLError ? error.errors[0] : error;
+    notifications.add(`Failed to save article: ${message}`);
     return;
   }
   dispatch({ type: at.SAVE_SUCCESS });
@@ -81,7 +83,9 @@ export default function EditArticlePage() {
 
   return (
     <Page responsive={false}>
-      <Link to="/articles" className={s.toArticles}>To articles</Link>
+      <Link to="/articles" className={s.toArticles}>
+        To articles
+      </Link>
       <form className={s.articleForm}>
         <div className={s.formGroup}>
           <input

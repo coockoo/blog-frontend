@@ -32,3 +32,5 @@ export default async function graphQLRequest(query, variables) {
   }
   return responseBody.data;
 }
+
+export { GraphQLError };
