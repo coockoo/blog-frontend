@@ -12,6 +12,8 @@ import createArticleMutation from 'Services/graphql/mutations/createArticle.gql'
 import updateArticleMutation from 'Services/graphql/mutations/updateArticle.gql';
 import graphQL from 'Services/graphql';
 
+import notifications from 'Services/notifications';
+
 import s from './styles.less';
 
 import { reducer, initialState, at } from './reducer';
@@ -42,6 +44,7 @@ async function doSaveArticle(id, state, dispatch, history) {
   if (isArticleNew) {
     history.replace(`/articles/${res.createArticle.id}/edit`);
   }
+  notifications.add('Article saved!');
 }
 
 async function doLoadArticle(id, dispatch) {

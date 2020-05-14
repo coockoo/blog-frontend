@@ -2,6 +2,7 @@ import React, { StrictMode } from 'react';
 import { hot } from 'react-hot-loader/root';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
+import Notifications from 'Components/Notifications';
 import PrivateRoute from 'Components/PrivateRoute';
 import TopNav from 'Components/TopNav';
 
@@ -32,6 +33,7 @@ function App() {
           <HomePage />
         </Route>
       </Router>
+      <Notifications />
     </StrictMode>
   );
 }
