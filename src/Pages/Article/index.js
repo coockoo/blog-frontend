@@ -6,6 +6,8 @@ import publishArticleMutation from 'Services/graphql/mutations/publishArticle.gq
 import unpublishArticleMutation from 'Services/graphql/mutations/unpublishArticle.gql';
 import graphQL from 'Services/graphql';
 
+import notifications from 'Services/notifications';
+
 import Button from 'Components/Button';
 import Date from 'Components/Date';
 import Markdown from 'Components/Markdown';
@@ -38,6 +40,7 @@ async function publishArticle(id, dispatch) {
     return;
   }
   dispatch({ type: at.PUBLISH_ARTICLE_SUCCESS });
+  notifications.add('Article published!');
 }
 
 async function unpublishArticle(id, dispatch) {
@@ -48,6 +51,7 @@ async function unpublishArticle(id, dispatch) {
     return;
   }
   dispatch({ type: at.UNPUBLISH_ARTICLE_SUCCESS });
+  notifications.add('Article unpublished!');
 }
 
 export default function ArticlePage() {
