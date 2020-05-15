@@ -31,6 +31,9 @@ function renderToken(token, index) {
   if (token.type === 'codespan') {
     return renderCodespan(token, index);
   }
+  if (token.type === 'image') {
+    return renderImage(token, index);
+  }
   if (token.type === 'strong') {
     const content = renderTokens(token.tokens);
     return <strong key={index}>{content}</strong>;
@@ -100,6 +103,14 @@ function renderCodespan(token, key) {
     <code key={key} className={s.codespan}>
       {token.text}
     </code>
+  );
+}
+
+function renderImage(token, key) {
+  return (
+    <div className={s.image}>
+      <img key={key} src={token.href} alt={token.text} title={token.title} />
+    </div>
   );
 }
 
