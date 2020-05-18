@@ -129,7 +129,7 @@ function renderSpace(token, key) {
 }
 
 function render(markdown) {
-  const tokens = marked.lexer(markdown);
+  const tokens = marked.lexer(markdown, { smartypants: true });
   return renderTokens(tokens);
 }
 
