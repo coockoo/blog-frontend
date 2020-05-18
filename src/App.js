@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Notifications from 'Components/Notifications';
 import PrivateRoute from 'Components/PrivateRoute';
 import TopNav from 'Components/TopNav';
+import Footer from 'Components/Footer';
 
 import ArticlePage from 'Pages/Article';
 import ArticlesPage from 'Pages/Articles';
@@ -32,6 +33,7 @@ function App() {
         <Route path="/" exact>
           <HomePage />
         </Route>
+        <Footer />
       </Router>
       <Notifications />
     </StrictMode>
