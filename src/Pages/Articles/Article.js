@@ -5,6 +5,7 @@ import useIsAuthenticated from 'Hooks/useIsAuthenticated';
 
 import Button from 'Components/Button';
 import Date from 'Components/Date';
+import Title from 'Components/Title';
 
 import s from './styles.less';
 
@@ -20,10 +21,10 @@ export default function Article(props) {
   return (
     <div className={s.article}>
       <div className={s.title}>
-        <h1>
+        <Title>
           <Link to={`/articles/${slug}`}>{title}</Link>
           {!isPublished ? <span className={s.unpublished}>(Unpublished)</span> : null}
-        </h1>
+        </Title>
         {isAuthenticated ? <Button onClick={edit}>Edit</Button> : null}
       </div>
       <Date value={isPublished ? lastPublishedAt : createdAt} />

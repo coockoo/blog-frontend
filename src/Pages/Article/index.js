@@ -12,6 +12,7 @@ import Button from 'Components/Button';
 import Date from 'Components/Date';
 import Markdown from 'Components/Markdown';
 import Page from 'Components/Page';
+import Title from 'Components/Title';
 
 import useIsAuthenticated from 'Hooks/useIsAuthenticated';
 
@@ -100,7 +101,7 @@ export default function ArticlePage() {
   return (
     <Page>
       <div className={s.title}>
-        <h1>{article.title}</h1>
+        <Title>{article.title}</Title>
         {isAuthenticated ? (
           <Fragment>
             <Button onClick={edit}>Edit</Button>
