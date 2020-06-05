@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Link from 'Components/Link';
+
 import s from './styles.less';
 
 export default function Footer() {
@@ -7,19 +9,13 @@ export default function Footer() {
     <div className={s.footer}>
       <ul>
         <li>
-          <a href="https://github.com/coockoo" target="_blank" rel="noreferrer">
-            github
-          </a>
+          <Link href="https://github.com/coockoo">github</Link>
         </li>
         <li>
-          <a href="https://twitter.com/BondarchukAlex_" target="_blank" rel="noreferrer">
-            twitter
-          </a>
+          <Link href="https://twitter.com/BondarchukAlex_">twitter</Link>
         </li>
         <li>
-          <a href="https://www.facebook.com/bondarchuk.alexandr" target="_blank" rel="noreferrer">
-            facebook
-          </a>
+          <Link href="https://www.facebook.com/bondarchuk.alexandr">facebook</Link>
         </li>
       </ul>
     </div>
