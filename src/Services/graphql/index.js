@@ -24,7 +24,7 @@ export default async function graphQLRequest(query, variables) {
   try {
     responseBody = await response.json();
   } catch (error) {
-    responseBody = { errors: [{ message: 'Network error' }] };
+    responseBody = { errors: [{ message: response.statusText }] };
   }
 
   if (!responseBody.data && responseBody.errors) {

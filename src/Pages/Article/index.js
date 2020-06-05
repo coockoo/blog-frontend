@@ -1,13 +1,6 @@
 import React, { Fragment, useEffect, useReducer, useCallback } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
-import articleQuery from 'Services/graphql/queries/article.gql';
-import publishArticleMutation from 'Services/graphql/mutations/publishArticle.gql';
-import unpublishArticleMutation from 'Services/graphql/mutations/unpublishArticle.gql';
-import graphQL from 'Services/graphql';
-
-import notifications from 'Services/notifications';
-
 import Button from 'Components/Button';
 import Date from 'Components/Date';
 import Markdown from 'Components/Markdown';
@@ -18,44 +11,9 @@ import useIsAuthenticated from 'Hooks/useIsAuthenticated';
 
 import s from './styles.less';
 
-import { reducer, initialState, at } from './reducer';
+import { reducer, initialState } from './reducer';
 
-async function loadArticle(id, dispatch) {
-  dispatch({ type: at.LOAD_START });
-  let res;
-  try {
-    const isId = `${id}`.match(/^\d+$/);
-    const args = isId ? { id } : { slug: id };
-    res = await graphQL(articleQuery, args);
-  } catch (error) {
-    console.error(error);
-    dispatch({ type: at.LOAD_ERROR });
-    return;
-  }
-  dispatch({ type: at.LOAD_SUCCESS, article: res.article });
-}
-
-async function publishArticle(id, dispatch) {
-  try {
-    await graphQL(publishArticleMutation, { id });
-  } catch (error) {
-    console.error(error);
-    return;
-  }
-  dispatch({ type: at.PUBLISH_ARTICLE_SUCCESS });
-  notifications.add('Article published!');
-}
-
-async function unpublishArticle(id, dispatch) {
-  try {
-    await graphQL(unpublishArticleMutation, { id });
-  } catch (error) {
-    console.error(error);
-    return;
-  }
-  dispatch({ type: at.UNPUBLISH_ARTICLE_SUCCESS });
-  notifications.add('Article unpublished!');
-}
+import actions from './actions';
 
 export default function ArticlePage() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -67,7 +25,7 @@ export default function ArticlePage() {
   const { article } = state;
 
   useEffect(() => {
-    loadArticle(id, dispatch);
+    actions.loadArticle(id, dispatch);
   }, [id]);
 
   const isLoading = state.isLoading || !article;
@@ -77,11 +35,11 @@ export default function ArticlePage() {
   }, [article, history]);
 
   const publish = useCallback(() => {
-    publishArticle(article.id, dispatch);
+    actions.publishArticle(article.id, dispatch);
   }, [article]);
 
   const unpublish = useCallback(() => {
-    unpublishArticle(article.id, dispatch);
+    actions.unpublishArticle(article.id, dispatch);
   }, [article]);
 
   if (isLoading) {
