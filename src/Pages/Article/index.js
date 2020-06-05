@@ -1,8 +1,9 @@
 import React, { Fragment, useEffect, useReducer, useCallback } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import Button from 'Components/Button';
 import Date from 'Components/Date';
+import Link from 'Components/Link';
 import Markdown from 'Components/Markdown';
 import Page from 'Components/Page';
 import Title from 'Components/Title';
@@ -17,7 +18,6 @@ import actions from './actions';
 
 export default function ArticlePage() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const history = useHistory();
 
   const { id } = useParams();
   const isAuthenticated = useIsAuthenticated();
@@ -29,10 +29,6 @@ export default function ArticlePage() {
   }, [id]);
 
   const isLoading = state.isLoading || !article;
-
-  const edit = useCallback(() => {
-    history.push(`/articles/${article.id}/edit`);
-  }, [article, history]);
 
   const publish = useCallback(() => {
     actions.publishArticle(article.id, dispatch);
@@ -62,7 +58,7 @@ export default function ArticlePage() {
         <Title>{article.title}</Title>
         {isAuthenticated ? (
           <Fragment>
-            <Button onClick={edit}>Edit</Button>
+            <Link to={`/articles/${article.id}/edit`}>Edit</Link>
             {!article.isPublished ? (
               <Button onClick={publish}>Publish</Button>
             ) : (
