@@ -3,11 +3,18 @@
 .title {
   font-family: @titleFontFamily;
   font-size: @titleFontSize;
-  line-height: 1em;
+  line-height: @titleFontSize;
+  margin-bottom: 0.5rem;
 
   > a {
     &:hover {
       text-decoration: underline;
     }
   }
+}
+
+.isLoading {
+  height: @titleFontSize;
+  max-width: 20rem;
+  background-color: lighten(@textColor, 50%);
 }
