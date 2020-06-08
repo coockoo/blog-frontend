@@ -1,37 +1,42 @@
 import React, { useReducer, useEffect } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 
+import Date from 'Components/Date';
+import Link from 'Components/Link';
 import Page from 'Components/Page';
+import Title from 'Components/Title';
 
-import articlesQuery from 'Services/graphql/queries/articles.gql';
-import graphQL from 'Services/graphql';
+import useIsAuthenticated from 'Hooks/useIsAuthenticated';
 
-import { reducer, initialState, at } from './reducer';
+import { reducer, initialState } from './reducer';
 
-import Article from './Article';
+import actions from './actions';
 
-async function loadArticles(dispatch) {
-  dispatch({ type: at.LOAD_ARTICLES_START });
-  try {
-    const res = await graphQL(articlesQuery);
-    const { count, rows } = res.articles;
-    dispatch({ type: at.LOAD_ARTICLES_SUCCESS, count, rows });
-  } catch (error) {
-    console.error(error);
-    dispatch({ type: at.LOAD_ARTICLES_ERROR });
-  }
-}
+import s from './styles.less';
 
 export default function ArticlesPage() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const isAuthenticated = useIsAuthenticated();
+
   useEffect(() => {
-    loadArticles(dispatch);
+    actions.loadArticles(dispatch);
   }, []);
 
   return (
     <Page>
       {state.rows.map((article) => (
-        <Article key={article.id} {...article} />
+        <div className={s.article} key={article.id}>
+          <div className={s.title}>
+            <Title>
+              <RouterLink to={`/articles/${article.slug}`}>{article.title}</RouterLink>
+              {!article.isPublished ? <span className={s.unpublished}>(Unpublished)</span> : null}
+            </Title>
+            {isAuthenticated ? <Link to={`/articles/${article.id}/edit`}>Edit</Link> : null}
+          </div>
+          <Date value={article.isPublished ? article.lastPublishedAt : article.createdAt} />
+          <p className={s.outline}>{article.outline}</p>
+        </div>
       ))}
     </Page>
   );
