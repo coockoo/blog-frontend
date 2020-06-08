@@ -10,7 +10,11 @@ export const at = {
 
 export const initialState = {
   isLoading: false,
-  article: null,
+  article: {
+    id: null,
+    title: '',
+    body: '',
+  },
 };
 
 export const reducer = createReducer({

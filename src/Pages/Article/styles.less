@@ -1,9 +1,5 @@
 @import '../../variables.less';
 
-.articleBody {
-  margin-top: 8px;
-}
-
 .title {
   display: flex;
   flex-direction: row;
@@ -12,37 +8,10 @@
 
   h1 {
     flex: 1;
+    margin-right: auto;
   }
 
   button {
     margin-left: 8px;
   }
-}
-
-.titlePlaceholder {
-  width: 60%;
-  height: @titleFontSize;
-  background-color: lighten(@textColor, 50%);
-}
-
-.datePlaceholder {
-  width: 20%;
-  height: @dateFontSize;
-  background-color: lighten(@secondaryTextColor, 50%);
-  margin-top: 2px;
-  margin-bottom: 16px;
-}
-
-.bodyPlaceholderA {
-  margin-bottom: 2px;
-  height: 16px;
-  width: 80%;
-  background-color: lighten(@textColor, 50%);
-}
-
-.bodyPlaceholderB {
-  margin-bottom: 16px;
-  height: 16px;
-  width: 40%;
-  background-color: lighten(@textColor, 80%);
 }

@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect, useReducer, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 
+import Body from 'Components/Body';
 import Button from 'Components/Button';
 import Date from 'Components/Date';
 import Link from 'Components/Link';
-import Markdown from 'Components/Markdown';
 import Page from 'Components/Page';
 import Title from 'Components/Title';
 
@@ -28,7 +28,7 @@ export default function ArticlePage() {
     actions.loadArticle(id, dispatch);
   }, [id]);
 
-  const isLoading = state.isLoading || !article;
+  const isLoading = state.isLoading || !article.id;
 
   const publish = useCallback(() => {
     actions.publishArticle(article.id, dispatch);
@@ -38,25 +38,11 @@ export default function ArticlePage() {
     actions.unpublishArticle(article.id, dispatch);
   }, [article]);
 
-  if (isLoading) {
-    return (
-      <Page>
-        <div className={s.titlePlaceholder}></div>
-        <div className={s.datePlaceholder}></div>
-
-        <div className={s.bodyPlaceholderA}></div>
-        <div className={s.bodyPlaceholderB}></div>
-        <div className={s.bodyPlaceholderA}></div>
-        <div className={s.bodyPlaceholderB}></div>
-      </Page>
-    );
-  }
-
   return (
     <Page>
       <div className={s.title}>
-        <Title>{article.title}</Title>
-        {isAuthenticated ? (
+        <Title isLoading={isLoading}>{article.title}</Title>
+        {isAuthenticated && !isLoading ? (
           <Fragment>
             <Link to={`/articles/${article.id}/edit`}>Edit</Link>
             {!article.isPublished ? (
@@ -67,10 +53,11 @@ export default function ArticlePage() {
           </Fragment>
         ) : null}
       </div>
-      <Date value={article.isPublished ? article.lastPublishedAt : article.createdAt} />
-      <div className={s.articleBody}>
-        <Markdown value={article.body} />
-      </div>
+      <Date
+        value={article.isPublished ? article.lastPublishedAt : article.createdAt}
+        isLoading={isLoading}
+      />
+      <Body isLoading={isLoading} value={article.body} />
     </Page>
   );
 }
