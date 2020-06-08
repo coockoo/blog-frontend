@@ -11,7 +11,8 @@ export default async function loadArticles(dispatch) {
   let count = 0;
   let rows = [];
   try {
-    const res = await graphQL(articlesQuery);
+    const args = { isPublished: true };
+    const res = await graphQL(articlesQuery, args);
     count = res.articles.count;
     rows = res.articles.rows;
   } catch (error) {
